@@ -1,0 +1,47 @@
+# Maintainer: Ebert Matthee <dev@ecmatthee.com>
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=()
+url=""
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$pkgname-$pkgver.tar.gz"
+        "$pkgname-$pkgver.patch")
+noextract=()
+md5sums=() #autofill using updpkgsums
+validpgpkeys=()
+
+prepare() {
+	cd "$pkgname-$pkgver" || exit
+	patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+}
+
+build() {
+	cd "$pkgname-$pkgver" || exit
+	./configure --prefix=/usr
+	make
+}
+
+check() {
+	cd "$pkgname-$pkgver" || exit
+	make -k check
+}
+
+package() {
+	cd "$pkgname-$pkgver" || exit
+	make DESTDIR="$pkgdir/" install
+}
