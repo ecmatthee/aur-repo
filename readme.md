@@ -1,3 +1,3 @@
 # aur-repo
 
-My collection of PKKGBUILDs.
+My collection of PKGBUILDs.
